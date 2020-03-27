@@ -1,3 +1,6 @@
+audio {
+	visibility: hidden;
+}
 .top-banner,
 .game-box {
 	background-color: #003f5c;
@@ -43,4 +46,10 @@ h2 {
 }
 .lower-right {
 	background-color: #ffcc00;
+}
+.flash {
+	visibility: hidden;
+}
+.normal {
+	visibility: visible;
 }

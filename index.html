@@ -20,13 +20,28 @@
         </div>
         <div class="container game-box">
             <div class="row">
-                <div class="col upper-left"></div>
-                <div class="col upper-right"></div>
+                <div id="btn1" class="col upper-left"></div>
+                <div id="btn2" class="col upper-right"></div>
             </div>
             <div class="row">
-                <div class="col lower-left"></div>
-                <div class="col lower-right"></div>
+                <div id="btn3" class="col lower-left"></div>
+                <div id="btn4" class="col lower-right"></div>
             </div>
+            <audio class="sounds" id="sound1" controls preload="none">
+                <source src="sources/sound1.mp3" type="audio/mp3">
+            </audio>
+            <audio class="sounds" id="sound2" controls preload="none">
+                <source src="sources/sound2.mp3" type="audio/mp3">
+            </audio>
+            <audio class="sounds" id="sound3" controls preload="none">    
+                <source src="sources/sound3.mp3" type="audio/mp3">
+            </audio>
+            <audio class="sounds" id="sound4" controls preload="none">
+                <source src="sources/sound4.mp3" type="audio/mp3">
+            </audio>
+            <audio class="sounds" id="soundOver" controls preload="none">   
+                <source src="sources/gameOver.mp3" type="audio/mp3">
+            </audio>        
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
