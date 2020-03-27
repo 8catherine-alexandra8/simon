@@ -1,0 +1,46 @@
+.top-banner,
+.game-box {
+	background-color: #003f5c;
+	margin-bottom: 0;
+	border-radius: 0;
+}
+.game-box {
+	min-height: 100vh;
+	min-width: 100vw;
+}
+.main-header,
+.sub-header {
+	font-family: 'Press Start 2P', cursive;
+	color: #ffcc00;
+}
+.sub-header {
+	font-size: 1.5rem;
+}
+h1,
+h2 {
+	text-align: center;
+}
+.row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.col {
+	min-height: 150px;
+	max-width: 150px;
+	border: 6px solid black;
+	border-radius: 25px;
+	margin: 15px;
+}
+.upper-left {
+	background-color: #ff6666;
+}
+.upper-right {
+	background-color: #cc0066;
+}
+.lower-left {
+	background-color: #66cccc;
+}
+.lower-right {
+	background-color: #ffcc00;
+}
