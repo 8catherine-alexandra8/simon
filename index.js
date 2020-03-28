@@ -13,6 +13,7 @@ $(document).keydown(function() {
 });
 
 function startGame() {
+	$(document).off('keydown');
 	let randomIndex = Math.floor(Math.random() * 4);
 	startButton = buttons[randomIndex][0];
 	startButton.classList.add('flash');
@@ -21,16 +22,19 @@ function startGame() {
 	setTimeout(function() {
 		startButton.classList.remove('flash');
 	}, 100);
+	userClickResponse();
 }
-$(document).click('col', function(event) {
-	userClick = event.target;
-	userClick.classList.add('flash');
-	playButtonSound(event.target.id);
-	setTimeout(function() {
-		userClick.classList.remove('flash');
-	}, 100);
-	userPlayed.push(event.target.id);
-});
+function userClickResponse() {
+	$(document).click('col', function(event) {
+		userClick = event.target;
+		userClick.classList.add('flash');
+		playButtonSound(event.target.id);
+		setTimeout(function() {
+			userClick.classList.remove('flash');
+		}, 100);
+		userPlayed.push(event.target.id);
+	});
+}
 
 function playButtonSound(id) {
 	switch (id) {
