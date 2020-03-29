@@ -26,9 +26,11 @@ function startGame() {
 }
 $(document).click('col', function(event) {
 	userClickResponse(event.target);
+	console.log(event.target);
 });
 
 function userClickResponse(target) {
+	console.log(target);
 	userClick = event.target;
 	userClick.classList.add('flash');
 	playButtonSound(event.target.id);
@@ -76,5 +78,4 @@ function simonsTurn() {
 	setTimeout(function() {
 		nextPlay.classList.remove('flash');
 	}, 100);
-	userClickResponse();
 }
