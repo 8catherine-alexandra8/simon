@@ -5,10 +5,8 @@ let buttonSounds = [
 	$('#sound3'),
 	$('#sound4')
 ];
-let simonPlayed;
-let userFirstPlay;
-let userPlayed = 'a';
-let clickCount = 0;
+let simonPlayed = [];
+let userPlayed = [];
 let level = 1;
 
 $(document).keydown(function() {
@@ -22,90 +20,63 @@ function startGame() {
 	let randomIndex = Math.floor(Math.random() * 4);
 	startButton = buttons[randomIndex][0];
 	startButton.classList.add('flash');
-	simonPlayed = startButton.id;
+	simonPlayed.push(startButton.id);
 	console.log(`in startGame, simonPlayed = ${simonPlayed}`);
 	buttonSounds[randomIndex].trigger('play');
 	setTimeout(function() {
 		startButton.classList.remove('flash');
 	}, 50);
+	console.log(simonPlayed);
 }
 function simonsTurn() {
+	userPlayed = [];
+	level++;
+	$('h2').text(`level ${level}`);
 	console.log('simonsTurn running');
 	let index = Math.floor(Math.random() * 4);
 	let nextPlay = buttons[index][0];
 	nextPlay.classList.add('flash');
-	simonPlayed = simonPlayed + nextPlay.id;
+	simonPlayed.push(nextPlay.id);
 	console.log(`after simonsTurn, simonPlayed  = ${simonPlayed}`);
 	buttonSounds[index].trigger('play');
 	setTimeout(function() {
 		nextPlay.classList.remove('flash');
 	}, 50);
-	userPlayed = 'a';
-	clickCount = 1;
-	console.log(userPlayed);
 }
 
 $(document).click('col', function(event) {
-	clickCount++;
-	console.log(clickCount);
-	if (clickCount === 1) {
-		userFirstTurn(event.target);
-		buttonSoundAndFlash(event.target.id);
-	} else {
-		console.log(clickCount);
-		userTurn(event.target);
-		buttonSoundAndFlash(event.target.id);
-	}
+	buttonSoundAndFlash(event.target.id);
+	userTurn(event.target);
 });
-function userFirstTurn(target) {
-	console.log('userFirstTurn running');
-
-	userFirstPlay = event.target.id;
-	console.log(
-		`userFirstTurn with clickCount of ${clickCount} and userFirstPlay value of ${userFirstPlay}`
-	);
-	comparePlays(userFirstPlay);
-}
 
 function userTurn(target) {
 	console.log('userTurn running');
-
-	userPlay = event.target.id;
-	userPlayed = userPlayed + userPlay;
+	userPlayed.push(event.target.id);
 	console.log(userPlayed);
-	comparePlays(userPlayed);
+	comparePlays(userPlayed.length - 1);
 }
 
-function comparePlays() {
+function comparePlays(currentLevel) {
 	console.log('comparePlays running');
-
-	let simonPlayedA = 'a' + simonPlayed;
-	setTimeout(function() {
-		console.log(userPlayed);
-		if (simonPlayed === userFirstPlay || simonPlayedA === userPlayed) {
-			console.log(
-				`in comparePlays, simonPlayedA is ${simonPlayedA}, simonPlayed is ${simonPlayed}, userFirstPlay is ${userFirstPlay} and userPlayed is ${userPlayed}`
-			);
-			winRound();
-			return;
-		} else {
-			gameOver();
-			console.log('gameover triggered in comparePlays');
+	if (simonPlayed[currentLevel] === userPlayed[currentLevel]) {
+		if (userPlayed.length === simonPlayed.length) {
+			setTimeout(function() {
+				simonsTurn();
+			}, 1000);
 		}
-	}, 3000);
-}
-function winRound() {
-	console.log('winRound running');
-
-	level++;
-	$('h2').text(`level ${level}`);
-	simonsTurn();
+	} else {
+		gameOver();
+	}
 }
 function gameOver() {
 	console.log('gaveOver running');
 
 	console.log('gameOver');
+	setTimeout(function() {
+		location.reload();
+	}, 3000);
 }
+
 function buttonSoundAndFlash(id) {
 	switch (id) {
 		case 'btn1':
