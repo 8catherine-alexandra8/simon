@@ -50,6 +50,6 @@ h2 {
 .flash {
 	visibility: hidden;
 }
-.test {
-	visibility: hidden;
+.hide {
+	display: none;
 }
