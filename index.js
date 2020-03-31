@@ -9,12 +9,15 @@ let simonPlayed;
 let userFirstPlay;
 let userPlayed = 'a';
 let clickCount = 0;
+let level = 1;
 
 $(document).keydown(function() {
 	startGame();
 });
 
 function startGame() {
+	console.log('startGame running');
+	$('h2').text(`level ${level}`);
 	$(document).off('keydown');
 	let randomIndex = Math.floor(Math.random() * 4);
 	startButton = buttons[randomIndex][0];
@@ -27,6 +30,7 @@ function startGame() {
 	}, 50);
 }
 function simonsTurn() {
+	console.log('simonsTurn running');
 	let index = Math.floor(Math.random() * 4);
 	let nextPlay = buttons[index][0];
 	nextPlay.classList.add('flash');
@@ -36,7 +40,7 @@ function simonsTurn() {
 	setTimeout(function() {
 		nextPlay.classList.remove('flash');
 	}, 50);
-	userPlayed;
+	userPlayed = 'a';
 	clickCount = 1;
 	console.log(userPlayed);
 }
@@ -54,6 +58,8 @@ $(document).click('col', function(event) {
 	}
 });
 function userFirstTurn(target) {
+	console.log('userFirstTurn running');
+
 	userFirstPlay = event.target.id;
 	console.log(
 		`userFirstTurn with clickCount of ${clickCount} and userFirstPlay value of ${userFirstPlay}`
@@ -62,6 +68,8 @@ function userFirstTurn(target) {
 }
 
 function userTurn(target) {
+	console.log('userTurn running');
+
 	userPlay = event.target.id;
 	userPlayed = userPlayed + userPlay;
 	console.log(userPlayed);
@@ -69,21 +77,34 @@ function userTurn(target) {
 }
 
 function comparePlays() {
+	console.log('comparePlays running');
+
+	let simonPlayedA = 'a' + simonPlayed;
 	setTimeout(function() {
 		console.log(userPlayed);
-		if (
-			simonPlayed === userFirstPlay ||
-			'a' + simonPlayed === userPlayed
-		) {
+		if (simonPlayed === userFirstPlay || simonPlayedA === userPlayed) {
 			console.log(
-				`in comparePlays, simonPlayed is ${simonPlayed}, userFirstPlay is ${userFirstPlay} and userPlayed is ${userPlayed}`
+				`in comparePlays, simonPlayedA is ${simonPlayedA}, simonPlayed is ${simonPlayed}, userFirstPlay is ${userFirstPlay} and userPlayed is ${userPlayed}`
 			);
-			userPlayed = 'a';
-			simonsTurn();
-		} else {
+			winRound();
 			return;
+		} else {
+			gameOver();
+			console.log('gameover triggered in comparePlays');
 		}
 	}, 3000);
+}
+function winRound() {
+	console.log('winRound running');
+
+	level++;
+	$('h2').text(`level ${level}`);
+	simonsTurn();
+}
+function gameOver() {
+	console.log('gaveOver running');
+
+	console.log('gameOver');
 }
 function buttonSoundAndFlash(id) {
 	switch (id) {
